@@ -754,7 +754,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   #footer { padding-top: 60px; }
   .newsletter-form { flex-direction: column; gap: 8px; }
   .newsletter-form input { width: 100%; box-sizing: border-box; }
-  .newsletter-form .btn-primary { width: 100%; justify-content: center; border-radius: 8px; }
+  .newsletter-form .btn-primary { width: 100%; max-width: none; justify-content: center; border-radius: 8px; box-sizing: border-box; }
 
   /* Contact send button */
   .btn-full { width: 100%; box-sizing: border-box; }
@@ -829,7 +829,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .footer-bottom .container { flex-direction: column; gap: 10px; text-align: center; }
   .footer-bottom-links { justify-content: center; gap: 18px; }
   .newsletter-form { flex-direction: column; gap: 8px; }
-  .newsletter-form .btn-primary { width: 100%; justify-content: center; border-radius: 8px; }
+  .newsletter-form .btn-primary { width: 100%; max-width: none; justify-content: center; border-radius: 8px; box-sizing: border-box; }
 
   /* Back to top */
   #backToTop { bottom: 20px; right: 16px; width: 42px; height: 42px; }
