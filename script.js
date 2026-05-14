@@ -269,3 +269,6 @@ document.querySelectorAll('.services-grid, .stats-grid, .why-grid, .testimonials
   });
   gridObserver.observe(grid);
 });
+
+/* ─── COPYRIGHT YEAR ─────────────────────────────────────── */
+document.getElementById('copyrightYear').textContent = new Date().getFullYear();
