@@ -26,7 +26,7 @@ window.addEventListener('scroll', () => {
 
 /* ─── HAMBURGER MENU ─────────────────────────────────────── */
 const hamburger = document.getElementById('hamburger');
-const navLinks  = document.getElementById('navLinks');
+const navLinks = document.getElementById('navLinks');
 
 hamburger.addEventListener('click', () => {
   hamburger.classList.toggle('active');
@@ -61,7 +61,7 @@ sections.forEach(s => sectionObserver.observe(s));
 const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-      const el  = entry.target;
+      const el = entry.target;
       const delay = el.dataset.delay ? parseInt(el.dataset.delay) : 0;
       setTimeout(() => el.classList.add('visible'), delay);
       revealObserver.unobserve(el);
@@ -76,10 +76,10 @@ document.querySelectorAll('.reveal-up, .reveal-fade').forEach(el => {
 
 /* ─── COUNTER ANIMATION ─────────────────────────────────── */
 function animateCount(el) {
-  const target   = parseInt(el.dataset.target, 10);
+  const target = parseInt(el.dataset.target, 10);
   const duration = 2000;
-  const step     = Math.ceil(target / (duration / 16));
-  let   current  = 0;
+  const step = Math.ceil(target / (duration / 16));
+  let current = 0;
 
   const tick = () => {
     current = Math.min(current + step, target);
@@ -109,10 +109,10 @@ function createParticles() {
     const p = document.createElement('div');
     p.className = 'particle';
 
-    const size  = Math.random() * 3 + 1;
-    const x     = Math.random() * 100;
+    const size = Math.random() * 3 + 1;
+    const x = Math.random() * 100;
     const delay = Math.random() * 12;
-    const dur   = Math.random() * 8 + 6;
+    const dur = Math.random() * 8 + 6;
 
     p.style.cssText = `
       left: ${x}%;
@@ -149,12 +149,12 @@ if (contactForm) {
   contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const btn     = contactForm.querySelector('button[type="submit"]');
-    const span    = btn.querySelector('span');
+    const btn = contactForm.querySelector('button[type="submit"]');
+    const span = btn.querySelector('span');
     const original = span.textContent;
 
-    btn.disabled      = true;
-    span.textContent  = 'Sending…';
+    btn.disabled = true;
+    span.textContent = 'Sending…';
     btn.style.opacity = '0.75';
 
     try {
@@ -180,7 +180,7 @@ if (contactForm) {
         setTimeout(() => {
           banner.remove();
           contactForm.style.display = '';
-          btn.disabled     = false;
+          btn.disabled = false;
           span.textContent = original;
           btn.style.opacity = '1';
         }, 6000);
@@ -188,12 +188,12 @@ if (contactForm) {
         throw new Error('submission failed');
       }
     } catch {
-      span.textContent  = 'Failed — try again';
+      span.textContent = 'Failed — try again';
       btn.style.opacity = '1';
       btn.style.background = '#c0392b';
       setTimeout(() => {
         span.textContent = original;
-        btn.disabled     = false;
+        btn.disabled = false;
         btn.style.background = '';
       }, 3000);
     }
@@ -205,10 +205,10 @@ const newsletterForm = document.getElementById('newsletterForm');
 if (newsletterForm) {
   newsletterForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const btn   = newsletterForm.querySelector('button');
+    const btn = newsletterForm.querySelector('button');
     const input = newsletterForm.querySelector('input');
     btn.textContent = 'Subscribing…';
-    btn.disabled    = true;
+    btn.disabled = true;
 
     try {
       const res = await fetch(newsletterForm.action, {
@@ -227,8 +227,8 @@ if (newsletterForm) {
         }, 3000);
       } else { throw new Error(); }
     } catch {
-      btn.textContent  = 'Try again';
-      btn.disabled     = false;
+      btn.textContent = 'Try again';
+      btn.disabled = false;
     }
   });
 }
@@ -236,9 +236,9 @@ if (newsletterForm) {
 /* ─── SERVICE CARD TILT EFFECT ───────────────────────────── */
 document.querySelectorAll('.service-card').forEach(card => {
   card.addEventListener('mousemove', e => {
-    const rect  = card.getBoundingClientRect();
-    const x     = ((e.clientX - rect.left) / rect.width  - 0.5) * 8;
-    const y     = ((e.clientY - rect.top)  / rect.height - 0.5) * 8;
+    const rect = card.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 8;
+    const y = ((e.clientY - rect.top) / rect.height - 0.5) * 8;
     card.style.transform = `translateY(-6px) rotateX(${-y}deg) rotateY(${x}deg)`;
   });
   card.addEventListener('mouseleave', () => {
@@ -272,3 +272,104 @@ document.querySelectorAll('.services-grid, .stats-grid, .why-grid, .testimonials
 
 /* ─── COPYRIGHT YEAR ─────────────────────────────────────── */
 document.getElementById('copyrightYear').textContent = new Date().getFullYear();
+
+
+/* ─── PROMO POPUP ────────────────────────────────────────── */
+document.addEventListener('DOMContentLoaded', function () {
+
+  var overlay = document.getElementById('promoOverlay');
+  var closeBtn = document.getElementById('promoClose');
+  var secEl = document.getElementById('promoSeconds');
+  var form = document.getElementById('promoForm');
+
+  if (!overlay) {
+    console.warn('Promo popup: #promoOverlay not found in DOM');
+    return;
+  }
+
+  function openPromo() {
+    overlay.style.opacity = '1';
+    overlay.style.visibility = 'visible';
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closePromo() {
+    overlay.style.opacity = '0';
+    overlay.style.visibility = 'hidden';
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  /* Show popup — wait for preloader then add a small buffer */
+  setTimeout(openPromo, 5000);
+
+  /* Close on X */
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closePromo);
+  }
+
+  /* Close on backdrop click */
+  overlay.addEventListener('click', function (e) {
+    if (e.target === overlay) closePromo();
+  });
+
+  /* Close on Escape key */
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closePromo();
+  });
+
+  /* Form submit */
+  if (form) {
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      var btn = form.querySelector('.promo-submit');
+      var span = btn ? btn.querySelector('span') : null;
+
+      if (btn) btn.disabled = true;
+      if (span) span.textContent = 'Sending…';
+
+      try {
+        var res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (res.ok) {
+          var modal = overlay.querySelector('.promo-modal');
+          if (modal) {
+            modal.innerHTML = '<div class="promo-success">'
+              + '<div class="promo-success__icon">'
+              + '<svg viewBox="0 0 24 24" fill="none">'
+              + '<path d="M22 11.08V12a10 10 0 11-5.93-9.14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>'
+              + '<path d="M22 4L12 14.01l-3-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>'
+              + '</svg></div>'
+              + '<h3>You\'re In!</h3>'
+              + '<p>Thanks! We\'ve received your details and will reach out within 24 hours to get your landing page started.</p>'
+              + '<button class="btn-primary" id="promoSuccessClose" style="margin-top:8px">Close</button>'
+              + '</div>';
+
+            var sc = document.getElementById('promoSuccessClose');
+            if (sc) sc.addEventListener('click', closePromo);
+          }
+        } else {
+          throw new Error('server error');
+        }
+      } catch (err) {
+        console.error('Promo form error:', err);
+        if (span) span.textContent = 'Failed — try again';
+        if (btn) {
+          btn.style.background = '#c0392b';
+          setTimeout(function () {
+            if (span) span.textContent = 'Secure This Offer';
+            btn.disabled = false;
+            btn.style.background = '';
+          }, 3000);
+        }
+      }
+    });
+  }
+
+});
