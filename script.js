@@ -275,6 +275,9 @@ document.getElementById('copyrightYear').textContent = new Date().getFullYear();
 
 
 /* ─── PROMO POPUP ────────────────────────────────────────── */
+/* Toggle this flag to 'false' to completely disable the promo popup */
+const ENABLE_PROMO = true;
+
 document.addEventListener('DOMContentLoaded', function () {
 
   var overlay = document.getElementById('promoOverlay');
@@ -282,8 +285,9 @@ document.addEventListener('DOMContentLoaded', function () {
   var secEl = document.getElementById('promoSeconds');
   var form = document.getElementById('promoForm');
 
-  if (!overlay) {
-    console.warn('Promo popup: #promoOverlay not found in DOM');
+  // Exit immediately if the overlay isn't in the DOM or the promo is disabled
+  if (!overlay || !ENABLE_PROMO) {
+    if (!overlay && ENABLE_PROMO) console.warn('Promo popup: #promoOverlay not found in DOM');
     return;
   }
 
