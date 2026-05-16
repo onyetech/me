@@ -1101,3 +1101,19 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   
   pointer-events: none;
 }
+
+
+/* Slanted strike on the logo */
+.nav-logo::before, .footer-brand::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -5%;
+  width: 110%;
+  height: 2px;
+  background: #d4af37; /* Gold strike */
+  transform: translateY(-50%) rotate(-15deg);
+  z-index: 20;
+  box-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
+  pointer-events: none;
+}
