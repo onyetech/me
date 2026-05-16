@@ -1025,7 +1025,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 .premium-submit {
   background: var(--navy); color: white;
-  border: 1px solid var(--navy); display: block; box-sizing: border-box;
+  border: 1px solid var(--navy); display: block; box-sizing: border-box; max-width: none;
   margin-top: 12px; padding: 14px; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase;
   border-radius: 4px; width: 100%; cursor: pointer; font-family: var(--font-body); font-weight: 600;
   transition: background 0.3s, color 0.3s;
